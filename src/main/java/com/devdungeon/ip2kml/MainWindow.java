@@ -5,16 +5,19 @@
  */
 package com.devdungeon.ip2kml;
 
-import com.devdungeon.aboutwindow.AboutWindow;
 import java.awt.Desktop;
+import java.awt.Image;
+import java.awt.MediaTracker;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -30,18 +33,38 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
 
-        setWindowIcon();
-        setDefaultOutputFilepath();
-    }
+        loadIcons();
 
-    private void setWindowIcon() {
-        ImageIcon img = new ImageIcon(AboutWindow.class.getResource("/devdungeon120x120.png"));
-        this.setIconImage(img.getImage());
+        setDefaultOutputFilepath();
     }
 
     private void setDefaultOutputFilepath() {
         String defaultOutputFile = System.getProperty("user.home") + File.separator + "output.kml";
         this.outputFilepathTextField.setText(defaultOutputFile);
+    }
+
+    private void loadIcons() {
+        List<Image> icons = new ArrayList<>();
+        icons.add(loadIcon("/logos/devdungeon16x16.png"));
+        icons.add(loadIcon("/logos/devdungeon32x32.png"));
+        icons.add(loadIcon("/logos/devdungeon48x48.png"));
+        icons.add(loadIcon("/logos/devdungeon64x64.png"));
+        icons.add(loadIcon("/logos/devdungeon128x128.png"));
+        icons.add(loadIcon("/logos/devdungeon256x256.png"));
+        setIconImages(icons);
+    }
+
+    private Image loadIcon(String name) {
+        Image icon = Toolkit.getDefaultToolkit().getImage(getClass().getResource(name));
+        MediaTracker mediaTracker = new MediaTracker(this);
+        mediaTracker.addImage(icon, 0);
+        try {
+            mediaTracker.waitForID(0);
+            return icon;
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -67,6 +90,7 @@ public class MainWindow extends javax.swing.JFrame {
         openFileMenuItem = new javax.swing.JMenuItem();
         exitMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
+        tipsMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -95,6 +119,7 @@ public class MainWindow extends javax.swing.JFrame {
         outputFileLabel.setText("Output File (.kml)");
 
         iptextLabel.setText("IP Addresses/Domain Names (One per line)");
+        iptextLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         chooseOutputFileButton.setText("Choose Output File");
         chooseOutputFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +158,14 @@ public class MainWindow extends javax.swing.JFrame {
         mainMenubar.add(mainMenu);
 
         helpMenu.setText("Help");
+
+        tipsMenuItem.setText("Tips");
+        tipsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tipsMenuItemActionPerformed(evt);
+            }
+        });
+        helpMenu.add(tipsMenuItem);
 
         aboutMenuItem.setText("About");
         aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -260,6 +293,11 @@ public class MainWindow extends javax.swing.JFrame {
         AboutWindow.main(args);
     }//GEN-LAST:event_aboutMenuItemActionPerformed
 
+    private void tipsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipsMenuItemActionPerformed
+        String[] args = new String[0];
+        TipsWindow.main(args);
+    }//GEN-LAST:event_tipsMenuItemActionPerformed
+
     private String getFileContents(String fileName) {
         String line;
         String allLines = null;
@@ -285,30 +323,8 @@ public class MainWindow extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+        WindowHelper.setLookAndFeel();
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -333,5 +349,6 @@ public class MainWindow extends javax.swing.JFrame {
     javax.swing.JLabel outputFileLabel;
     javax.swing.JTextField outputFilepathTextField;
     com.devdungeon.ip2kml.StatusBarPanel statusBarPanel;
+    javax.swing.JMenuItem tipsMenuItem;
     // End of variables declaration//GEN-END:variables
 }
