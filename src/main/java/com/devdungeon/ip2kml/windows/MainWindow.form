@@ -182,7 +182,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="com.devdungeon.ip2kml.StatusBarPanel" name="statusBarPanel">
+    <Component class="com.devdungeon.ip2kml.windows.StatusBarPanel" name="statusBarPanel">
     </Component>
     <Component class="javax.swing.JButton" name="chooseOutputFileButton">
       <Properties>

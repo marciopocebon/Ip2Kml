@@ -5,6 +5,8 @@
  */
 package com.devdungeon.ip2kml;
 
+import com.devdungeon.ip2kml.windows.MainWindow;
+
 /**
  *
  * @author dtron

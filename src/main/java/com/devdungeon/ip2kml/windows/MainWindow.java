@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.devdungeon.ip2kml;
+package com.devdungeon.ip2kml.windows;
 
+import com.devdungeon.ip2kml.helpers.KmlGenerator;
+import com.devdungeon.ip2kml.helpers.WindowHelper;
 import java.awt.Desktop;
 import java.awt.Image;
 import java.awt.MediaTracker;
@@ -82,7 +84,7 @@ public class MainWindow extends javax.swing.JFrame {
         outputFilepathTextField = new javax.swing.JTextField();
         outputFileLabel = new javax.swing.JLabel();
         iptextLabel = new javax.swing.JLabel();
-        statusBarPanel = new com.devdungeon.ip2kml.StatusBarPanel();
+        statusBarPanel = new com.devdungeon.ip2kml.windows.StatusBarPanel();
         chooseOutputFileButton = new javax.swing.JButton();
         openFolderButton = new javax.swing.JButton();
         mainMenubar = new javax.swing.JMenuBar();
@@ -348,7 +350,7 @@ public class MainWindow extends javax.swing.JFrame {
     javax.swing.JButton openFolderButton;
     javax.swing.JLabel outputFileLabel;
     javax.swing.JTextField outputFilepathTextField;
-    com.devdungeon.ip2kml.StatusBarPanel statusBarPanel;
+    com.devdungeon.ip2kml.windows.StatusBarPanel statusBarPanel;
     javax.swing.JMenuItem tipsMenuItem;
     // End of variables declaration//GEN-END:variables
 }
