@@ -1,7 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 NanoDano <nanodano@devdungeon.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.devdungeon.ip2kml.windows;
 
@@ -21,6 +33,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -253,6 +266,7 @@ public class MainWindow extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
+            checkOutputFilePath(file.getAbsolutePath());
             this.outputFilepathTextField.setText(file.getAbsolutePath());
         }
     }//GEN-LAST:event_chooseOutputFileButtonActionPerformed
@@ -264,11 +278,12 @@ public class MainWindow extends javax.swing.JFrame {
         // Get all the lines from the text area, complain if empty, or too many
         String[] ipList = this.ipListTextArea.getText().split("\n");
 
-        KmlGenerator.generateKml(ipList, outputFile);
-
-        // If everything successful
-        this.statusBarPanel.statusBarLabel.setText("Generated: " + outputFile);
-        // otherwise output error message in status bar
+        try {
+            KmlGenerator.generateKml(ipList, outputFile);
+            this.statusBarPanel.statusBarLabel.setText("Generated: " + outputFile);
+        } catch (IOException ex) {
+            this.statusBarPanel.statusBarLabel.setText("Error: " + ex.getLocalizedMessage());
+        }
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void openFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderButtonActionPerformed
@@ -302,7 +317,7 @@ public class MainWindow extends javax.swing.JFrame {
 
     private String getFileContents(String fileName) {
         String line;
-        String allLines = null;
+        String allLines = "";
         try {
             // FileReader reads text files in the default encoding.
             FileReader fileReader
@@ -353,4 +368,38 @@ public class MainWindow extends javax.swing.JFrame {
     com.devdungeon.ip2kml.windows.StatusBarPanel statusBarPanel;
     javax.swing.JMenuItem tipsMenuItem;
     // End of variables declaration//GEN-END:variables
+
+    private void checkOutputFilePath(String absolutePath) {
+        String fileExtension = getFileExtension(absolutePath);
+        System.out.println(fileExtension);
+        // If no extension, alert, ask if want to add .kml?
+        if (fileExtension.equals("")) {
+            JOptionPane.showMessageDialog(this, "Warning: No file extension provided. The file should have .kml extension.", "No file extension", JOptionPane.WARNING_MESSAGE);
+        } else if (!(fileExtension.toUpperCase().equals("KML"))) {
+            JOptionPane.showMessageDialog(this, "Warning: The file extension you provided is not .kml.", "Incorrect file extension", JOptionPane.WARNING_MESSAGE);
+        }
+
+        // checkIfExists()
+        File outputFile = new File(absolutePath);
+        if (outputFile.exists()) {
+            JOptionPane.showMessageDialog(this, "Warning: The file already exists.", "File already exists.", JOptionPane.WARNING_MESSAGE);
+        }
+
+        // get parent dir
+        String parentDirPath = outputFile.getParentFile().getAbsolutePath();
+        File parentDir = new File(parentDirPath);
+        if (!parentDir.exists()) {
+            JOptionPane.showMessageDialog(this, "Warning: Parent directories do not exist.", "Parent directories do not exist", JOptionPane.WARNING_MESSAGE);
+        }
+
+    }
+
+    private static String getFileExtension(String filepath) {
+        String[] splitFilepath = filepath.split("\\.");
+        int index = splitFilepath.length - 1;
+        if (index < 1) {
+            return "";
+        }
+        return splitFilepath[index];
+    }
 }

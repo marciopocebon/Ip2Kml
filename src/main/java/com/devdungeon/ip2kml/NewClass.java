@@ -17,20 +17,10 @@
  */
 package com.devdungeon.ip2kml;
 
-import com.devdungeon.ip2kml.windows.MainWindow;
-
 /**
  *
- * @author dtron
+ * @author NanoDano <nanodano@devdungeon.com>
  */
-public class Main {
-
-    /**
-     *
-     * @param args
-     */
-    public static final void main(String[] args) {
-        MainWindow.main(args);
-    }
-
+public class NewClass {
+    
 }

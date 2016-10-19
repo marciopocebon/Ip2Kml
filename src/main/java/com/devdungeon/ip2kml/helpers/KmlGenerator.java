@@ -1,7 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2016 NanoDano <nanodano@devdungeon.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 package com.devdungeon.ip2kml.helpers;
 
@@ -56,7 +68,12 @@ public class KmlGenerator {
     }
 
     // Given a list of IP/domain names, do the geoip lookup and generate a kml file
-    public static void generateKml(String[] ipList, String outputFile) {
+    /**
+     *
+     * @param ipList
+     * @param outputFile
+     */
+    public static void generateKml(String[] ipList, String outputFile) throws IOException {
 
         // if file already exists, dialog, overwrite? yes/no
         // open file, output documentOpen
@@ -115,16 +132,13 @@ public class KmlGenerator {
         writeFile(outputFile, documentOpen + documentContents + documentClose);
     }
 
-    private static void writeFile(String fileName, String contents) {
-        try {
-            FileWriter fileWriter = new FileWriter(fileName);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-            bufferedWriter.write(contents);
-            bufferedWriter.close();
-            System.out.println("Generated file.");
-        } catch (IOException ex) {
-            System.out.println("Error writing to file '" + fileName + "'");
-        }
+    private static void writeFile(String fileName, String contents) throws IOException {
+        FileWriter fileWriter = new FileWriter(fileName);
+        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+        bufferedWriter.write(contents);
+        bufferedWriter.close();
+        System.out.println("Generated file.");
+
     }
 
 }
