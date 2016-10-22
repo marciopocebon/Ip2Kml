@@ -54,7 +54,7 @@ public class TipsWindow extends javax.swing.JFrame {
         tipsTextArea.setEditable(false);
         tipsTextArea.setColumns(20);
         tipsTextArea.setRows(5);
-        tipsTextArea.setText("Tips:\n\n- Load a file containing IP addresses or host names.\n- Do not include a protocol like http://\n- It uses the https://freegeoip.net backend\n- You can manually type in the output file name\n  or use the \"Choose file\" option.\n- Add the .kml extension to the end of your\n  output file name.\n- The default output filename is output.kml in your\n  user's home directory.");
+        tipsTextArea.setText("- Load a file containing IP addresses or domain names.\n- Blank lines and lines starting with # are ignored.\n- Do not include a protocol like http:// in the IP list.\n- It uses the https://freegeoip.net backend.\n- You can manually type in the output file name\n  or use the \"Choose file\" option.\n- Add the .kml extension to the end of your\n  output file name.\n- The default output filename is output.kml in your\n  user's home directory.\n");
         tipsScrollPane.setViewportView(tipsTextArea);
 
         closeButton.setText("Close Window");

@@ -65,7 +65,7 @@
             <Property name="editable" type="boolean" value="false"/>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="Tips:&#xa;&#xa;- Load a file containing IP addresses or host names.&#xa;- Do not include a protocol like http://&#xa;- It uses the https://freegeoip.net backend&#xa;- You can manually type in the output file name&#xa;  or use the &quot;Choose file&quot; option.&#xa;- Add the .kml extension to the end of your&#xa;  output file name.&#xa;- The default output filename is output.kml in your&#xa;  user&apos;s home directory."/>
+            <Property name="text" type="java.lang.String" value="- Load a file containing IP addresses or domain names.&#xa;- Blank lines and lines starting with # are ignored.&#xa;- Do not include a protocol like http:// in the IP list.&#xa;- It uses the https://freegeoip.net backend.&#xa;- You can manually type in the output file name&#xa;  or use the &quot;Choose file&quot; option.&#xa;- Add the .kml extension to the end of your&#xa;  output file name.&#xa;- The default output filename is output.kml in your&#xa;  user&apos;s home directory.&#xa;"/>
           </Properties>
         </Component>
       </SubComponents>

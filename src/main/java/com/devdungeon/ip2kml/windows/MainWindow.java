@@ -38,7 +38,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
- * @author dtron
+ * @author NanoDano <nanodano@devdungeon.com>
  */
 public class MainWindow extends javax.swing.JFrame {
 
@@ -48,7 +48,7 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
         initComponents();
 
-        loadIcons();
+        setIconImages(WindowHelper.loadIcons());
 
         setDefaultOutputFilepath();
     }
@@ -273,17 +273,15 @@ public class MainWindow extends javax.swing.JFrame {
 
     private void generateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateButtonActionPerformed
         String outputFile = this.outputFilepathTextField.getText();
-        this.statusBarPanel.statusBarLabel.setText("Generating " + outputFile + ". Please wait...");
+        this.statusBarPanel.statusBarLabel.setText("Please wait, generating " + outputFile + ".");
 
         // Get all the lines from the text area, complain if empty, or too many
         String[] ipList = this.ipListTextArea.getText().split("\n");
 
-        try {
-            KmlGenerator.generateKml(ipList, outputFile);
-            this.statusBarPanel.statusBarLabel.setText("Generated: " + outputFile);
-        } catch (IOException ex) {
-            this.statusBarPanel.statusBarLabel.setText("Error: " + ex.getLocalizedMessage());
-        }
+        // generator kml in a thread kmlGeneratorThread = new KmlGenerator();start()
+        Thread thread = new Thread(new KmlGenerator(ipList, outputFile, this));
+        thread.start();
+        this.statusBarPanel.statusBarLabel.setText("Generating " + outputFile + ". Please wait...");
     }//GEN-LAST:event_generateButtonActionPerformed
 
     private void openFolderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openFolderButtonActionPerformed
@@ -401,5 +399,9 @@ public class MainWindow extends javax.swing.JFrame {
             return "";
         }
         return splitFilepath[index];
+    }
+
+    public void setStatusBar(String text) {
+        this.statusBarPanel.statusBarLabel.setText(text);
     }
 }

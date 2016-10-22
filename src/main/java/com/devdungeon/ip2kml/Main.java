@@ -21,7 +21,7 @@ import com.devdungeon.ip2kml.windows.MainWindow;
 
 /**
  *
- * @author dtron
+ * @author NanoDano <nanodano@devdungeon.com>
  */
 public class Main {
 

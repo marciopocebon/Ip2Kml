@@ -19,7 +19,7 @@ package com.devdungeon.ip2kml.windows;
 
 /**
  *
- * @author dtron
+ * @author NanoDano <nanodano@devdungeon.com>
  */
 public class StatusBarPanel extends javax.swing.JPanel {
 

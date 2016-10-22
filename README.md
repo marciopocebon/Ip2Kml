@@ -1,8 +1,8 @@
 Ip2Kml
 ======
 
-Tool for taking a list of IP addresses or hostnames, geolocating it, and
-creating a Google Earth KML file with all of the hosts marked with pins.
+Provide a list of IP addresses or domain names and Ip2Kml will generate
+a Google Earth KML file with the geolocations of the servers pinned and labeled.
 
 
 Quick Start
