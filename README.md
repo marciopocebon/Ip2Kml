@@ -30,7 +30,7 @@ Running
 * Ensure Java 7 or greater is installed
 * Double click the .jar file or run at the command line with:
 
-`java -jar BinauralGenerator-1.0.jar`
+`java -jar Ip2Kml-1.0.jar`
 
 
 Contact

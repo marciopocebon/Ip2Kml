@@ -51,7 +51,7 @@ public class KmlGenerator implements Runnable {
         conn = (HttpURLConnection) remoteUrl.openConnection();
         conn.setRequestMethod("GET");
         conn.setDoOutput(true);
-        conn.setRequestProperty("User-Agent", "Ip2Kml");
+        conn.setRequestProperty("User-Agent", "Ip2Kml http://github.com/DevDungeon/Ip2Kml");
 
         String responseText = "";
         in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
