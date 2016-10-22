@@ -113,7 +113,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         ipListTextArea.setColumns(20);
         ipListTextArea.setRows(5);
-        ipListTextArea.setText("www.devdungeon.com\nwww.webgeno.me\nwww.example.com\nwww.freegeoip.com\n");
+        ipListTextArea.setText("www.devdungeon.com\nwww.webgeno.me\nwww.example.com\nwww.freegeoip.net\n");
         ipListTextArea.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         iplistTextfield.setViewportView(ipListTextArea);
 
