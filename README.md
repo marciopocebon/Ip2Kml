@@ -5,6 +5,7 @@ Provide a list of IP addresses or domain names and Ip2Kml will generate
 a Google Earth KML file with the geolocations of the servers pinned and labeled.
 
 ![Screenshot of main window](screenshots/mainWindow.png)
+![Screenshot of main window](screenshots/googleEarthPins.png)
 
 Features
 --------
